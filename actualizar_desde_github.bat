@@ -10,29 +10,28 @@ REM Comprobar si Git esta instalado en el sistema
 where git >nul 2>nul
 if %ERRORLEVEL% neq 0 (
     echo [AVISO] Git no esta instalado en este equipo.
-    echo Para actualizar sin Git, descarga el archivo ZIP desde GitHub.
+    echo Abriendo la pagina de GitHub en tu navegador para ver la version actualizada...
+    start https://github.com/RodriA45/Grua-Robotica-4dof
     echo.
     pause
     exit /b
 )
 
-REM Comprobar si esta carpeta es un repositorio Git (.git)
+REM Si la carpeta no tiene .git, conectar automaticamente con el repo
 if not exist ".git" (
-    echo [INFO] Esta carpeta aun no esta inicializada con Git.
+    echo [INFO] Configurando conexion con GitHub por primera vez...
+    git init
+    git remote add origin https://github.com/RodriA45/Grua-Robotica-4dof.git
+    git fetch origin main
+    git reset --hard origin/main
+    echo [OK] Sincronizacion inicial completada exitosamente.
     echo.
-    echo Para conectar esta carpeta a tu GitHub por primera vez:
-    echo   1. Abre una terminal aqui.
-    echo   2. Ejecuta: git init
-    echo   3. Ejecuta: git remote add origin https://github.com/RodriA45/Grua-Robotica-4dof.git
-    echo   4. Ejecuta: git pull origin main
-    echo.
-    pause
-    exit /b
+    goto FIN
 )
 
-echo Descargando y combinando ultimos cambios de GitHub...
+echo Descargando y aplicando ultimos cambios de GitHub...
 echo.
-git pull
+git pull origin main
 if %ERRORLEVEL% equ 0 (
     echo.
     echo ====================================================================
@@ -44,5 +43,6 @@ if %ERRORLEVEL% equ 0 (
     echo Revisa tu conexion a internet o si hay archivos modificados localmente.
 )
 
+:FIN
 echo.
 pause
