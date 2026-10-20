@@ -1,0 +1,31 @@
+# Entornos virtuales Python
+.venv/
+venv/
+env/
+ENV/
+
+# Python bytecode y caché
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller temporales
+build/
+dist/
+*.spec
+
+# Archivos de configuración de IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs y volcados del sistema
+*.log
+Desktop.ini
+Thumbs.db
+
+# Archivos específicos locales / profesor
+LEEME_PROFESOR.txt
+*.zip
+
